@@ -118,9 +118,23 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
+STATIC_URL = '/TweetApprover/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'TweetApprover/static/'),
+    # os.path.join(BASE_DIR, 'DjangoTest/static/samples/'),
+)
+
+# 以下为邮件发送配置
+EMAIL_HOST = 'smtp.qq.com'   #邮箱的smtp服务器地址
+EMAIL_PORT = 25			#端口
+EMAIL_HOST_USER = '*@qq.com'      #使用者邮箱
+EMAIL_HOST_PASSWORD = 'tx'     #第三方授权码
+EMAIL_USE_TLS = False                 # 与SMTP服务器通信时，是否启动TLS链接(安全链接)。
+EMAIL_FROM = '*@qq.com'            #发送者邮箱，就是发送者

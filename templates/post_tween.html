@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>postTween</title>
+</head>
+<body>
+     <form action="" method="post"> <!--提交执行转过来的方法-->
+        {% csrf_token %}
+        <table>{{ form }}</table>
+        <input type="submit" value="Submit" />
+     </form>
+</body>
+</html>
