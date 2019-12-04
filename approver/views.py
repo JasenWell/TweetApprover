@@ -46,6 +46,7 @@ def reviewTweet(request, tweet_id):
                 reviewed_tweet.published_at = datetime.now()
                 reviewed_tweet.state = 'published'
             else:
+                #reverse(postTweet, args=[reviewed_tweet.id]) 可以获取到对应的网址
                 link = request.build_absolute_uri(reverse(postTweet, args=[reviewed_tweet.id]))  # 获取编辑表单的链接
                 #sendRejectionEmail(reviewed_tweet, new_comment, link)
                 reviewed_tweet.state = 'rejected'
