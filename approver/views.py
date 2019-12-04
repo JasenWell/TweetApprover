@@ -1,3 +1,4 @@
+# coding=utf-8
 from datetime import datetime
 
 from django.contrib.auth.decorators import permission_required
@@ -13,7 +14,7 @@ from poster.models import Tweet, Comment
 from poster.views import postTweet
 
 
-class ReviewForm(forms.Form): #Ã»ÓĞÈÎºÎÊµÌåµÄ±íµ¥
+class ReviewForm(forms.Form):  # æ²¡æœ‰ä»»ä½•å®ä½“çš„è¡¨å•
     new_comment = forms.CharField(max_length=300, widget=forms.Textarea(attrs={'cols': 50, 'row': 6}), required=False)
     APPROVAL_CHOICES = (
         ('approve', 'Approve this tweet and post it to Twitter'),
@@ -21,7 +22,7 @@ class ReviewForm(forms.Form): #Ã»ÓĞÈÎºÎÊµÌåµÄ±íµ¥
     approval = forms.ChoiceField(choices=APPROVAL_CHOICES, widget=forms.RadioSelect)
 
 
-# Õâ²¿·Ö¶¨ÒåÒ»¸ö±íµ¥ÑéÖ¤
+# è¿™éƒ¨åˆ†å®šä¹‰ä¸€ä¸ªè¡¨å•éªŒè¯
 
 
 @permission_required('poster.can_approve_or_reject_tweet', login_url='/login')
@@ -31,7 +32,7 @@ def listTweets(request):
     return render(request, 'list_tweets.html', {'pending_tweets': pending_tweets, 'published_tweets': published_tweets})
 
 
-# µÚÒ»²¿·ÖÊÇÁĞ³öÓÃ»§µÄÍÆÎÄÁĞ±í£¬ÒÔ¼°¸÷ÖÖ×´Ì¬£¬ÕâÀïÊÇÏŞÖÆÁËµÇÂ¼È¨ÏŞµÄ£¬·ñÔò¶¼ÊÇÖØ¶¨Ïòµ½loginÒ³ÃæÈ¥
+# ç¬¬ä¸€éƒ¨åˆ†æ˜¯åˆ—å‡ºç”¨æˆ·çš„æ¨æ–‡åˆ—è¡¨ï¼Œä»¥åŠå„ç§çŠ¶æ€ï¼Œè¿™é‡Œæ˜¯é™åˆ¶äº†ç™»å½•æƒé™çš„ï¼Œå¦åˆ™éƒ½æ˜¯é‡å®šå‘åˆ°loginé¡µé¢å»
 
 @permission_required('poster.can_approve_or_reject_tweet', login_url='/login')
 def reviewTweet(request, tweet_id):
@@ -39,16 +40,16 @@ def reviewTweet(request, tweet_id):
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
-            new_comment = form.cleaned_data['new_comment']  # ´Ó±íµ¥»ñÈ¡ÓÃ»§Ìá½»µÄÊı¾İ ,new_commentÎªReviewForm×Ö¶Î
+            new_comment = form.cleaned_data['new_comment']  # ä»è¡¨å•è·å–ç”¨æˆ·æäº¤çš„æ•°æ® ,new_commentä¸ºReviewFormå­—æ®µ
             if form.cleaned_data['approval'] == 'approve':
                 # publish_tweet(review_tweet)
-                #sendApprovalEmail(reviewed_tweet, new_comment)
+                # sendApprovalEmail(reviewed_tweet, new_comment)
                 reviewed_tweet.published_at = datetime.now()
                 reviewed_tweet.state = 'published'
             else:
-                #reverse(postTweet, args=[reviewed_tweet.id]) ¿ÉÒÔ»ñÈ¡µ½¶ÔÓ¦µÄÍøÖ·
-                link = request.build_absolute_uri(reverse(postTweet, args=[reviewed_tweet.id]))  # »ñÈ¡±à¼­±íµ¥µÄÁ´½Ó
-                #sendRejectionEmail(reviewed_tweet, new_comment, link)
+                # reverse(postTweet, args=[reviewed_tweet.id]) å¯ä»¥è·å–åˆ°å¯¹åº”çš„ç½‘å€
+                link = request.build_absolute_uri(reverse(postTweet, args=[reviewed_tweet.id]))  # è·å–ç¼–è¾‘è¡¨å•çš„é“¾æ¥
+                # sendRejectionEmail(reviewed_tweet, new_comment, link)
                 reviewed_tweet.state = 'rejected'
             reviewed_tweet.save()
             if new_comment:
@@ -64,7 +65,7 @@ def reviewTweet(request, tweet_id):
 def sendApprovalEmail(tweet, new_comment):
     body = ['Your tweet (%r) was approved & published on Twitter.' % tweet.text]
     if new_comment:
-        body.append( 'The reviewer gave this feedback: %r' % new_comment)
+        body.append('The reviewer gave this feedback: %r' % new_comment)
     send_mail('Tweet Published', '%s\r\n' % (''.join(body)), settings.EMAIL_FROM, [tweet.author_email])
 
 
