@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-# https://blog.csdn.net/weixin_44207181/article/details/90743384
+
 from django.contrib.auth.views import login,logout,LoginView,LogoutView
 urlpatterns = [
     url(r'^admin/',admin.site.urls),
