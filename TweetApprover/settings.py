@@ -141,7 +141,7 @@ STATICFILES_DIRS = (
 # 发送邮件配置
 EMAIL_HOST = 'smtp.qq.com'   #
 EMAIL_PORT = 25			#
-EMAIL_HOST_USER = '*@qq.com'   
+EMAIL_HOST_USER = '*@qq.com'
 EMAIL_HOST_PASSWORD = 'tx'     #授权码
 EMAIL_USE_TLS = False                 #
 EMAIL_FROM = '*@qq.com'            #
