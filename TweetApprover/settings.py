@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os,pymysql
 
 pymysql.install_as_MySQLdb()
-# ³¬¼¶ÓÃ»§  hjh he123456
+# superuser  hjh he123456
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -71,6 +71,12 @@ TEMPLATES = [
     },
 ]
 
+CACHES = {
+    'default':{
+        'BACKEND':'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
 WSGI_APPLICATION = 'TweetApprover.wsgi.application'
 
 # Database
@@ -83,9 +89,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tweetapprover',
         'USER': 'tweet_manager',
-        'PASSWORD': '20191203',  # ÃÜÂë£¬¿ÉÒÔÅäÖÃÔÚÏµÍ³»·¾³±äÁ¿ÖĞenviron.get(''),
-        'HOST': '127.0.0.1',  # Ö÷»úlocalhost
-        'PORT': '3306',  # Êı¾İ¿âÊ¹ÓÃµÄ¶Ë¿Ú
+        'PASSWORD': '20191203',  # å¯é…ç½®åœ¨ç¯å¢ƒå˜é‡environ.get(''),
+        'HOST': '127.0.0.1',  # localhost
+        'PORT': '3306',  #
     }
 }
 
@@ -111,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 #LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'zh-Hans' # ºóÌ¨¹ÜÀíÏÔÊ¾ÖĞÎÄ
+LANGUAGE_CODE = 'zh-Hans' # ç®¡ç†å°ä¸­æ–‡
 
 TIME_ZONE = 'UTC'
 
@@ -132,10 +138,10 @@ STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, 'DjangoTest/static/samples/'),
 )
 
-# ÒÔÏÂÎªÓÊ¼ş·¢ËÍÅäÖÃ
-EMAIL_HOST = 'smtp.qq.com'   #ÓÊÏäµÄsmtp·şÎñÆ÷µØÖ·
-EMAIL_PORT = 25			#¶Ë¿Ú
-EMAIL_HOST_USER = '*@qq.com'      #Ê¹ÓÃÕßÓÊÏä
-EMAIL_HOST_PASSWORD = 'tx'     #µÚÈı·½ÊÚÈ¨Âë
-EMAIL_USE_TLS = False                 # ÓëSMTP·şÎñÆ÷Í¨ĞÅÊ±£¬ÊÇ·ñÆô¶¯TLSÁ´½Ó(°²È«Á´½Ó)¡£
-EMAIL_FROM = '*@qq.com'            #·¢ËÍÕßÓÊÏä£¬¾ÍÊÇ·¢ËÍÕß
+# å‘é€é‚®ä»¶é…ç½®
+EMAIL_HOST = 'smtp.qq.com'   #
+EMAIL_PORT = 25			#
+EMAIL_HOST_USER = '*@qq.com'   
+EMAIL_HOST_PASSWORD = 'tx'     #æˆæƒç 
+EMAIL_USE_TLS = False                 #
+EMAIL_FROM = '*@qq.com'            #
